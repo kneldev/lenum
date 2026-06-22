@@ -24,24 +24,3 @@ class LenumController:
             "firewall": FirewallEnumerator(),
             "users": UserGroupPermissionEnumerator(),
         }
-
-    def run(self, selected_modules: Iterable[str] | None = None) -> list[dict[str, object]]:
-        """Run selected modules, or all modules when no selection is provided."""
-        module_names = list(selected_modules) if selected_modules is not None else list(self.modules)
-        results: list[dict[str, object]] = []
-
-        for module_name in module_names:
-            module = self.modules.get(module_name)
-            if module is None:
-                results.append(
-                    {
-                        "module": module_name,
-                        "status": "error",
-                        "errors": [f"Unknown module: {module_name}"],
-                    }
-                )
-                continue
-
-            results.append(module.run())
-
-        return results
