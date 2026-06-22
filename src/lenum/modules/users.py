@@ -5,8 +5,6 @@ from pathlib import Path
 import shutil
 import subprocess
 
-from lenum.models import ModuleResult
-
 
 class UserGroupPermissionEnumerator:
     """Placeholder for users, groups, and permission enumeration."""
@@ -19,6 +17,6 @@ class UserGroupPermissionEnumerator:
         self.shutil = shutil
         self.subprocess = subprocess
 
-    def run(self) -> ModuleResult:
+    def run(self) -> dict[str, object]:
         """Return user, group, and permission enumeration results."""
-        return ModuleResult(module=self.name, metadata={"implemented": False})
+        return {"module": self.name, "metadata": {"implemented": False}}

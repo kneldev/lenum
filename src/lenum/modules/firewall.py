@@ -4,8 +4,6 @@ from pathlib import Path
 import shutil
 import subprocess
 
-from lenum.models import ModuleResult
-
 
 class FirewallEnumerator:
     """Placeholder for firewall rule and policy enumeration."""
@@ -17,6 +15,6 @@ class FirewallEnumerator:
         self.shutil = shutil
         self.subprocess = subprocess
 
-    def run(self) -> ModuleResult:
+    def run(self) -> dict[str, object]:
         """Return firewall enumeration results."""
-        return ModuleResult(module=self.name, metadata={"implemented": False})
+        return {"module": self.name, "metadata": {"implemented": False}}

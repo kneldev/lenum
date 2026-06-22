@@ -4,8 +4,6 @@ from pathlib import Path
 import shutil
 import subprocess
 
-from lenum.models import ModuleResult
-
 
 class WirelessEnumerator:
     """Placeholder for SSID, wireless profile, and credential enumeration."""
@@ -17,6 +15,6 @@ class WirelessEnumerator:
         self.shutil = shutil
         self.subprocess = subprocess
 
-    def run(self) -> ModuleResult:
+    def run(self) -> dict[str, object]:
         """Return wireless enumeration results."""
-        return ModuleResult(module=self.name, metadata={"implemented": False})
+        return {"module": self.name, "metadata": {"implemented": False}}

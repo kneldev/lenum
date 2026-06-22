@@ -4,7 +4,6 @@ from __future__ import annotations
 
 from collections.abc import Iterable
 
-from lenum.models import ModuleResult
 from lenum.modules.firewall import FirewallEnumerator
 from lenum.modules.ports import PortEnumerator
 from lenum.modules.services import ServiceEnumerator
@@ -26,20 +25,20 @@ class LenumController:
             "users": UserGroupPermissionEnumerator(),
         }
 
-    def run(self, selected_modules: Iterable[str] | None = None) -> list[ModuleResult]:
+    def run(self, selected_modules: Iterable[str] | None = None) -> list[dict[str, object]]:
         """Run selected modules, or all modules when no selection is provided."""
         module_names = list(selected_modules) if selected_modules is not None else list(self.modules)
-        results: list[ModuleResult] = []
+        results: list[dict[str, object]] = []
 
         for module_name in module_names:
             module = self.modules.get(module_name)
             if module is None:
                 results.append(
-                    ModuleResult(
-                        module=module_name,
-                        status="error",
-                        errors=[f"Unknown module: {module_name}"],
-                    )
+                    {
+                        "module": module_name,
+                        "status": "error",
+                        "errors": [f"Unknown module: {module_name}"],
+                    }
                 )
                 continue
 

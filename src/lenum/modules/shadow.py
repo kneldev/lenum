@@ -3,8 +3,6 @@
 import os
 from pathlib import Path
 
-from lenum.models import ModuleResult
-
 
 class ShadowFileEnumerator:
     """Placeholder for /etc/shadow metadata and access checks."""
@@ -15,6 +13,6 @@ class ShadowFileEnumerator:
         self.os = os
         self.shadow_path = Path("/etc/shadow")
 
-    def run(self) -> ModuleResult:
+    def run(self) -> dict[str, object]:
         """Return shadow file enumeration results."""
-        return ModuleResult(module=self.name, metadata={"implemented": False})
+        return {"module": self.name, "metadata": {"implemented": False}}
