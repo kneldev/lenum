@@ -20,10 +20,7 @@ import subprocess
 # systemctl status iptables
 
 
-
 class FirewallEnumerator:
-
-
     name = "firewall"
 
     def __init__(self) -> None:
@@ -38,10 +35,9 @@ class FirewallEnumerator:
             self._service_status("nftables"),
             self._service_status("iptables"),
         ]
-        
+
         active = [p for p in providers if p["status"] == "active"]
-        
-        
+
         return {
             "module": self.name,
             "providers checked": providers,
@@ -49,19 +45,19 @@ class FirewallEnumerator:
             "errors": [],
         }
 
+    def _service_status(self, service_name: str) -> dict[str, object]:
+        result = self.subprocess.run(
+            ["systemctl", "is-active", service_name],
+            capture_output=True,
+            text=True,
+            check=False,
+        )
 
-# def _service_status(self, service_name: str) -> dict[str, object]:
-#         result = self.subprocess.run(
-#             ["systemctl", "is-active", service_name],
-#             capture_output=True,
-#             text=True,
-#             check=False,
-#         )
+        status = result.stdout.strip() or result.stderr.strip()
 
-#         status = result.stdout.strip() or result.stderr.strip()
+        return {
+            "name": service_name,
+            "active": result.returncode == 0,
+            "status": status,
+        }
 
-#         return {
-#             "name": service_name,
-#             "active": result.returncode == 0,
-#             "status": status,
-#         }

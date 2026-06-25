@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from collections.abc import Iterable
+# from collections.abc import Iterable
 
 from lenum.modules.firewall import FirewallEnumerator
 from lenum.modules.ports import PortEnumerator
@@ -24,3 +24,4 @@ class LenumController:
             "firewall": FirewallEnumerator(),
             "users": UserGroupPermissionEnumerator(),
         }
+
